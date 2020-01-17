@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='robots' content='noindex,nofollow'>
+  <title>Private Access</title>
+  <script src='private_access.js'></script>
+  <link rel='stylesheet' href='w3.css'>
+  <link rel='stylesheet' href='w3-theme-green.css'>
+</head>
+<body class='w3-container'>
+
+<div id='sec_div' class='w3-theme w3-card w3-panel w3-hide w3-show'>
+  <h2 class='w3-margin-bottom'>Private Access</h2>
+  <input id='sec_input' class='w3-card w3-input w3-margin-bottom' autocomplete='false' type='password'
+      placeholder='pass-code' autofocus/>
+  <button id='sec_button' class='w3-theme-d3 w3-card w3-button w3-margin-bottom'>Submit</button>
+</div>
+
+<div id='initially_hidden' class='w3-hide'>
+  <div id='c_div' class='w3-theme w3-card w3-panel'>
+    <div id='c'>
+      <h2>Church</h2>
+      <input id='c_search_input' class='w3-card w3-input w3-section' autocomplete='false' type='text'
+          placeholder='church id'/>
+      <button id='c_search_button' class='w3-theme-d3 w3-card w3-button w3-margin-bottom'>search</button>
+      <button id='c_new_button' class='w3-theme-d3 w3-card w3-button w3-margin-bottom'>new church</button>
+      <button id='c_close_button' class='w3-theme-d3 w3-card w3-button w3-margin-bottom'>close</button>
+      <div id='c_new_accordion' class='w3-white w3-card w3-panel w3-hide'>
+        <div class='w3-section'>
+          <label>name:</label>
+          <input id='c_new_name' class='w3-input w3-margin-bottom' maxlength='64' autocomplete='false' type='text'
+              placeholder='name'/>
+        </div>
+        <div class='w3-section'>
+          <label>denomination:</label>
+          <input id='c_new_denomination' class='w3-input w3-margin-bottom' maxlength='64' autocomplete='false'
+              type='text' placeholder='denomination'/>
+        </div>
+        <div class='w3-section'>
+          <button id='c_new_cancel' class='w3-theme-d3 w3-card w3-button'>cancel</button>
+          <button id='c_new_confirm' class='w3-theme-d3 w3-card w3-button'>confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <div id='c_accordion' class='w3-white w3-card w3-panel w3-hide'>
+      <div id='c_ch'>
+        <h3>info</h3>
+        <div class='w3-section'>
+          <label>id:</label>
+          <input id='c_ch_id_input' class='w3-input' maxlength='11' autocomplete='false' type='text' disabled
+              placeholder='id'/>
+        </div>
+        <div class='w3-section'>
+          <label>name:</label>
+          <input id='c_ch_name_input' class='w3-input' maxlength='64' autocomplete='false' type='text'
+              placeholder='name'/>
+        </div>
+        <div class='w3-section'>
+          <label>denomination:</label>
+          <input id='c_ch_denomination_input' class='w3-input' maxlength='64' autocomplete='false' type='text'
+              placeholder='denomination'/>
+        </div>
+        <div class='w3-section'>
+          <label>visibility:</label>
+          <select id='c_ch_visibility_select' class='w3-select'>
+            <option value='public'>public</option>
+            <option value='private'>private</option>
+          </select>
+        </div>
+        <div class='w3-section'>
+          <label>notes:</label>
+          <textarea id='c_ch_note_input' class='w3-input w3-border-left' maxlength='1024' autocomplete='false' rows='8'
+              placeholder='notes' style='resize: vertical'> </textarea>
+        </div>
+        <div class='w3-section'>
+          <button id='c_ch_cancel' class='w3-theme-d3 w3-card w3-button'>cancel</button>
+          <button id='c_ch_save' class='w3-theme-d3 w3-card w3-button'>save</button>
+        </div>
+      </div>
+
+      <div id='c_pe' class='w3-card w3-panel'>
+        <h3>people</h3>
+        <div id='c_pe_switchable' class='w3-section' style='overflow:auto'></div>
+        <div class='w3-section'>
+          <button id='c_pe_remove_button' class='w3-theme-d3 w3-card w3-button w3-margin-bottom'>unlink
+          </button>
+          <button id='c_pe_new_button' class='w3-theme-d3 w3-card w3-button w3-margin-bottom'>link
+          </button>
+        </div>
+        <div id='c_pe_remove_accordion' class='w3-section w3-hide'>
+          <div class='w3-section'>
+            <label>person id:</label>
+            <input id='c_pe_remove_input' class='w3-input' maxlength='11' autocomplete='false' type='text'
+                placeholder='person id'/>
+          </div>
+          <div class='w3-section'>
+            <button id='c_pe_remove_cancel' class='w3-theme-d3 w3-card w3-button'> cancel</button>
+            <button id='c_pe_remove_confirm' class='w3-theme-d3 w3-card w3-button'> confirm</button>
+          </div>
+        </div>
+        <div id='c_pe_new_accordion' class='w3-section w3-hide'>
+          <div class='w3-section'>
+            <label>person id:</label>
+            <input id='c_pe_new_id' class='w3-input' maxlength='11' autocomplete='false' type='text'
+                placeholder='person id'/>
+          </div>
+          <div class='w3-section'>
+            <label>type:</label>
+            <input id='c_pe_new_type' class='w3-input' maxlength='16' autocomplete='false' type='text'
+                placeholder='type'/>
+          </div>
+          <div class='w3-section'>
+            <button id='c_pe_new_cancel' class='w3-theme-d3 w3-card w3-button'>cancel</button>
+            <button id='c_pe_new_confirm' class='w3-theme-d3 w3-card w3-button'> confirm</button>
+          </div>
+        </div>
+      </div>
+
+      <div id='c_ph' class='w3-card w3-panel'>
+        <h3>phones</h3>
+        <div id='c_ph_switchable' class='w3-section' style='overflow:auto'></div>
+        <div class='w3-section'>
+          <button id='c_ph_remove_button' class='w3-theme-d3 w3-card w3-button'> remove</button>
+          <button id='c_ph_new_button' class='w3-theme-d3 w3-card w3-button'>new</button>
+        </div>
+        <div id='c_ph_remove_accordion' class='w3-section w3-hide'>
+          <div class='w3-section'>
+            <label>phone id:</label>
+            <input id='c_ph_remove_input' class='w3-input' maxlength='11' autocomplete='false' type='text'
+                placeholder='phone id'/>
+          </div>
+          <div class='w3-section'>
+            <button id='c_ph_remove_cancel' class='w3-theme-d3 w3-card w3-button'> cancel</button>
+            <button id='c_ph_remove_confirm' class='w3-theme-d3 w3-card w3-button'> confirm</button>
+          </div>
+        </div>
+        <div id='c_ph_new_accordion' class='w3-section w3-hide'>
+          <div class='w3-section'>
+            <label>number:</label>
+            <input id='c_ph_new_phone' class='w3-input' maxlength='16' autocomplete='false' type='text'
+                placeholder='phone number'/>
+          </div>
+          <div class='w3-section'>
+            <label>type</label>
+            <!--
+            <input id='c_ph_new_type' class='w3-input' maxlength='16' autocomplete='false' type='text'
+                placeholder='type'/>
+                -->
+            <select id='c_ph_new_type' class='w3-select'>
+              <option value='primary'>primary</option>
+              <option value='secondary'>secondary</option>
+            </select>
+          </div>
+          <div class='w3-section'>
+            <button id='c_ph_new_cancel' class='w3-theme-d3 w3-card w3-button'>cancel</button>
+            <button id='c_ph_new_confirm' class='w3-theme-d3 w3-card w3-button'> confirm</button>
+          </div>
+        </div>
+      </div>
+
+      <div id='c_em' class='w3-card w3-panel'>
+        <h3>emails</h3>
+        <div id='c_em_switchable' class='w3-section' style='overflow:auto'></div>
+        <div class='w3-section'>
+          <button id='c_em_remove_button' class='w3-theme-d3 w3-card w3-button'> remove</button>
+          <button id='c_em_new_button' class='w3-theme-d3 w3-card w3-button'>new</button>
+        </div>
+        <div id='c_em_remove_accordion' class='w3-section w3-hide'>
+          <div class='w3-section'>
+            <label>email id:</label>
+            <input id='c_em_remove_input' class='w3-input' maxlength='11' autocomplete='false' type='text'
+                placeholder='email id'/>
+          </div>
+          <div class='w3-section'>
+            <button id='c_em_remove_cancel' class='w3-theme-d3 w3-card w3-button'> cancel</button>
+            <button id='c_em_remove_confirm' class='w3-theme-d3 w3-card w3-button'> confirm</button>
+          </div>
+        </div>
+        <div id='c_em_new_accordion' class='w3-section w3-hide'>
+          <div class='w3-section'>
+            <label>email address:</label>
+            <input id='c_em_new_email' class='w3-input' maxlength='128' autocomplete='false' type='text'
+                placeholder='email address'/>
+          </div>
+          <div class='w3-section'>
+            <label>type:</label>
+            <!--
+            <input id='c_em_new_type' class='w3-input' maxlength='16' autocomplete='false' type='text'
+                placeholder='type'/>
+                -->
+            <select id='c_em_new_type' class='w3-select'>
+              <option value='primary'>primary</option>
+              <option value='secondary'>secondary</option>
+            </select>
+          </div>
+          <div class='w3-section'>
+            <button id='c_em_new_cancel' class='w3-theme-d3 w3-card w3-button'>cancel</button>
+            <button id='c_em_new_confirm' class='w3-theme-d3 w3-card w3-button'> confirm</button>
+          </div>
+        </div>
+      </div>
+
+      <div id='c_we' class='w3-card w3-panel'>
+        <h3>websites</h3>
+        <div id='c_we_switchable' class='w3-section' style='overflow:auto'></div>
+        <div class='w3-section'>
+          <button id='c_we_remove_button' class='w3-theme-d3 w3-card w3-button'> remove</button>
+          <button id='c_we_new_button' class='w3-theme-d3 w3-card w3-button'>new</button>
+        </div>
+        <div id='c_we_remove_accordion' class='w3-section w3-hide'>
+          <div class='w3-section'>
+            <label>website id:</label> <input id='c_we_remove_input' class='w3-input' maxlength='11'
+              autocomplete='false' type='text' placeholder='website id'/>
+          </div>
+          <div class='w3-section'>
+            <button id='c_we_remove_cancel' class='w3-theme-d3 w3-card w3-button'> cancel</button>
+            <button id='c_we_remove_confirm' class='w3-theme-d3 w3-card w3-button'> confirm</button>
+          </div>
+        </div>
+        <div id='c_we_new_accordion' class='w3-section w3-hide'>
+          <div class='w3-section'>
+            <label>url:</label>
+            <input id='c_we_new_url' class='w3-input' maxlength='256' autocomplete='false' type='text'
+                placeholder='url'/>
+          </div>
+          <div class='w3-section'>
+            <label>type:</label>
+            <!--
+            <input id='c_we_new_type' class='w3-input' maxlength='16' autocomplete='false' type='text'
+                placeholder='type'/>
+                -->
+            <select id='c_we_new_type' class='w3-select'>
+              <option value='primary'>primary</option>
+              <option value='secondary'>secondary</option>
+            </select>
+          </div>
+          <div class='w3-section'>
+            <button id='c_we_new_cancel' class='w3-theme-d3 w3-card w3-button'>cancel</button>
+            <button id='c_we_new_confirm' class='w3-theme-d3 w3-card w3-button'> confirm</button>
+          </div>
+        </div>
+      </div>
+
+      <div id='c_ad' class='w3-card w3-panel'>
+        <h3>addresses</h3>
+        <div id='c_ad_switchable' class='w3-section' style='overflow:auto'></div>
+        <div class='w3-section'>
+          <button id='c_ad_remove_button' class='w3-theme-d3 w3-card w3-button'> remove</button>
+          <button id='c_ad_new_button' class='w3-theme-d3 w3-card w3-button'>new</button>
+        </div>
+        <div id='c_ad_remove_accordion' class='w3-section w3-hide'>
+          <div class='w3-section'>
+            <label>address id:</label>
+            <input id='c_ad_remove_input' class='w3-input' maxlength='11' autocomplete='false' type='text'
+                placeholder='address id'/>
+          </div>
+          <div class='w3-section'>
+            <button id='c_ad_remove_cancel' class='w3-theme-d3 w3-card w3-button'> cancel</button>
+            <button id='c_ad_remove_confirm' class='w3-theme-d3 w3-card w3-button'> confirm</button>
+          </div>
+        </div>
+        <div id='c_ad_new_accordion' class='w3-section w3-hide'>
+          <div class='w3-section'>
+            <label>line 1:</label>
+            <input id='c_ad_new_line_1' class='w3-input' maxlength='64' autocomplete='false' type='text'
+                placeholder='line 1'/>
+          </div>
+          <div class='w3-section'>
+            <label>line 2:</label>
+            <input id='c_ad_new_line_2' class='w3-input' maxlength='64' autocomplete='false' type='text'
+                placeholder='line 2'/>
+          </div>
+          <div class='w3-section'>
+            <label>suburb:</label>
+            <input id='c_ad_new_suburb' class='w3-input' maxlength='64' autocomplete='false' type='text'
+                placeholder='suburb'/>
+          </div>
+          <div class='w3-section'>
+            <!--
+            <label>state:</label>
+            <input id='c_ad_new_state' class='w3-input' maxlength='32' autocomplete='false' type='text'
+                placeholder='state'/>
+                -->
+            <select id='c_ad_new_state' class='w3-select'>
+              <option value='TAS'>TAS</option>
+              <option value='VIC'>VIC</option>
+              <option value='NSW'>NSW</option>
+              <option value='QLD'>QLD</option>
+              <option value='SA'>SA</option>
+              <option value='NT'>NT</option>
+              <option value='WA'>WA</option>
+              <option value='ACT'>ACT</option>
+            </select>
+          </div>
+          <div class='w3-section'>
+            <label>post code:</label>
+            <input id='c_ad_new_post_code' class='w3-input' maxlength='8' autocomplete='false' type='text'
+                placeholder='post code'/>
+          </div>
+          <div class='w3-section'>
+            <label>type:</label>
+            <!--
+            <input id='c_ad_new_type' class='w3-input' maxlength='16' autocomplete='false' type='text'
+                placeholder='type'/>
+                -->
+            <select id='c_ad_new_type' class='w3-select'>
+              <option value='primary'>primary</option>
+              <option value='secondary'>secondary</option>
+            </select>
+          </div>
+          <div class='w3-section'>
+            <button id='c_ad_new_cancel' class='w3-theme-d3 w3-card w3-button'>cancel</button>
+            <button id='c_ad_new_confirm' class='w3-theme-d3 w3-card w3-button'> confirm</button>
+          </div>
+        </div>
+      </div>
+
+      <div id='c_br' class='w3-card w3-panel'>
+        <h3>breaking bread</h3>
+        <div class='w3-section'>
+          <label>participating:</label>
+          <select id='c_br_participating_select' class='w3-select'>
+            <option value='not yet contacted'>not yet contacted</option>
+            <option value='undecided'>undecided</option>
+            <option value='no'>no</option>
+            <option value='yes'>yes</option>
+          </select>
+        </div>
+        <div class='w3-section'>
+          <label>time (hh:mm:ss):</label>
+          <input id='c_br_time_input' class='w3-input' maxlength='8' autocomplete='false' type='text'
+              placeholder='time'/>
+        </div>
+        <div class='w3-section'>
+          <label>Address:</label>
+          <br>
+          <label>line 1:</label>
+          <input id='c_br_add_line_1' class='w3-input' maxlength='64' autocomplete='false' type='text'
+              placeholder='line 1'/>
+        </div>
+        <div class='w3-section'>
+          <label>line 2:</label>
+          <input id='c_br_add_line_2' class='w3-input' maxlength='64' autocomplete='false' type='text'
+              placeholder='line 2'/>
+        </div>
+        <div class='w3-section w3-row-padding'>
+          <div class='w3-third'>
+            <label>suburb:</label>
+            <input id='c_br_add_suburb' class='w3-input' maxlength='64' autocomplete='false' type='text'
+                placeholder='suburb'/>
+          </div>
+          <div class='w3-third'>
+            <label>state:</label>
+            <select id='c_br_add_state' class='w3-select'>
+              <option value='TAS'>TAS</option>
+              <option value='VIC'>VIC</option>
+              <option value='NSW'>NSW</option>
+              <option value='QLD'>QLD</option>
+              <option value='SA'>SA</option>
+              <option value='NT'>NT</option>
+              <option value='WA'>WA</option>
+              <option value='ACT'>ACT</option>
+            </select>
+          </div>
+          <div class='w3-third'>
+            <label>post code:</label>
+            <input id='c_br_add_post_code' class='w3-input' maxlength='8' autocomplete='false' type='text'
+                placeholder='post code'/>
+          </div>
+        </div>
+        <div class='w3-section'>
+          <label>notes:</label>
+          <textarea id='c_br_note_input' class='w3-input w3-border-left' maxlength='1024' autocomplete='false' rows='4'
+              placeholder='notes' style='resize: vertical'> </textarea>
+        </div>
+        <div class='w3-section'>
+          <button id='c_br_cancel' class='w3-theme-d3 w3-card w3-button'>cancel</button>
+          <button id='c_br_save' class='w3-theme-d3 w3-card w3-button'>save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id='ct_div' class='w3-theme w3-card w3-panel'>
+    <h2>Church Table</h2>
+    <div id='ct_switchable' class='w3-white w3-card w3-responsive' style='max-height: 500px'></div>
+    <div class='w3-row'>
+      <div class='w3-quarter w3-margin-right'>
+        <label>sort column:</label>
+        <select id='ct_select_column' class='w3-select'>
+          <option value='__pk_id'>id</option>
+          <option value='name'>name</option>
+          <option value='denomination'>denomination</option>
+        </select>
+      </div>
+      <div class='w3-quarter'>
+        <label>sort direction:</label>
+        <select id='ct_select_direction' class='w3-select'>
+          <option value='ASC'>Ascending</option>
+          <option value='DESC'>Descending</option>
+        </select>
+      </div>
+    </div>
+    <div class='w3-section'>
+      <button id='ct_button' class='w3-theme-d3 w3-card w3-button'>Fetch Table
+      </button>
+    </div>
+  </div>
+
+  <div id='p_div' class='w3-theme w3-card w3-panel'>
+    <div id='p'>
+      <h2>Person</h2>
+      <input id='p_search_input' class='w3-card w3-input w3-section' autocomplete='false' type='text'
+          placeholder='person id'/>
+      <button id='p_search_button' class='w3-theme-d3 w3-card w3-button w3-margin-bottom'>search</button>
+      <button id='p_new_button' class='w3-theme-d3 w3-card w3-button w3-margin-bottom'>new person</button>
+      <button id='p_close_button' class='w3-theme-d3 w3-card w3-button w3-margin-bottom'>close</button>
+      <div id='p_new_accordion' class='w3-white w3-card w3-panel w3-hide'>
+        <div class='w3-section'>
+          <label>first name:</label>
+          <input id='p_new_first_name' class='w3-input' maxlength='64' autocomplete='false' type='text'
+              placeholder='first name'/>
+        </div>
+        <div class='w3-section'>
+          <label>last name:</label>
+          <input id='p_new_last_name' class='w3-input' maxlength='64' autocomplete='false' type='text'
+              placeholder='last name'/>
+        </div>
+        <div class='w3-section'>
+          <button id='p_new_cancel' class='w3-theme-d3 w3-card w3-button'>cancel</button>
+          <button id='p_new_confirm' class='w3-theme-d3 w3-card w3-button'>confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <div id='p_accordion' class='w3-white w3-card w3-panel w3-hide'>
+      <div id='p_pe'>
+        <h3>info</h3>
+        <div class='w3-section'>
+          <label>id:</label>
+          <input id='p_pe_id_input' class='w3-input' maxlength='11' autocomplete='false' type='text' disabled
+              placeholder='id'/>
+        </div>
+        <div class='w3-section'>
+          <label>first name:</label>
+          <input id='p_pe_first_name_input' class='w3-input' maxlength='64' autocomplete='false' type='text'
+              placeholder='first name'/>
+        </div>
+        <div class='w3-section'>
+          <label>last name:</label>
+          <input id='p_pe_last_name_input' class='w3-input' maxlength='64' autocomplete='false' type='text'
+              placeholder='last name'/>
+        </div>
+        <div class='w3-section'>
+          <label>notes:</label>
+          <textarea id='p_pe_note_input' class='w3-input w3-border-left' maxlength='1024' autocomplete='false' rows='8'
+              placeholder='notes' style='resize: vertical'> </textarea>
+        </div>
+        <div class='w3-section'>
+          <button id='p_pe_cancel' class='w3-theme-d3 w3-card w3-button'>cancel</button>
+          <button id='p_pe_save' class='w3-theme-d3 w3-card w3-button '>save</button>
+        </div>
+      </div>
+
+      <div id='p_ch' class='w3-card w3-panel'>
+        <h3>churches</h3>
+        <div id='p_ch_switchable' class='w3-section' style='overflow:auto'></div>
+        <div class='w3-section'>
+          <button id='p_ch_remove_button' class='w3-theme-d3 w3-card w3-button'> unlink</button>
+          <button id='p_ch_new_button' class='w3-theme-d3 w3-card w3-button'>link</button>
+        </div>
+        <div id='p_ch_remove_accordion' class='w3-hide'>
+          <div class='w3-section'>
+            <label>person id:</label>
+            <input id='p_ch_remove_input' class='w3-input' maxlength='11' autocomplete='false' type='text'
+                placeholder='church id'/>
+          </div>
+          <div class='w3-section'>
+            <button id='p_ch_remove_cancel' class='w3-theme-d3 w3-card w3-button'> cancel</button>
+            <button id='p_ch_remove_confirm' class='w3-theme-d3 w3-card w3-button'> confirm</button>
+          </div>
+        </div>
+        <div id='p_ch_new_accordion' class='w3-hide'>
+          <div class='w3-section'>
+            <label>church id:</label>
+            <input id='p_ch_new_id' class='w3-input' maxlength='11' autocomplete='false' type='text'
+                placeholder='church id'/>
+          </div>
+          <div class='w3-section'>
+            <label>type:</label>
+            <input id='p_ch_new_type' class='w3-input' maxlength='16' autocomplete='false' type='text'
+                placeholder='type'/>
+          </div>
+          <div class='w3-section'>
+            <button id='p_ch_new_cancel' class='w3-theme-d3 w3-card w3-button'>cancel</button>
+            <button id='p_ch_new_confirm' class='w3-theme-d3 w3-card w3-button'> confirm</button>
+          </div>
+        </div>
+      </div>
+
+      <div id='p_ph' class='w3-card w3-section w3-padding'>
+        <h3>phones</h3>
+        <div id='p_ph_switchable' class='w3-section' style='overflow:auto'></div>
+        <div class='w3-section'>
+          <button id='p_ph_remove_button' class='w3-theme-d3 w3-card w3-button'> remove</button>
+          <button id='p_ph_new_button' class='w3-theme-d3 w3-card w3-button'>new</button>
+        </div>
+        <div id='p_ph_remove_accordion' class='w3-hide'>
+          <div class='w3-section'>
+            <label>phone id</label>
+            <input id='p_ph_remove_input' class='w3-input ' maxlength='11' autocomplete='false' type='text'
+                placeholder='phone id'/>
+          </div>
+          <div class='w3-section'>
+            <button id='p_ph_remove_cancel' class='w3-theme-d3 w3-card w3-button'>cancel</button>
+            <button id='p_ph_remove_confirm' class='w3-theme-d3 w3-card w3-button'>confirm</button>
+          </div>
+        </div>
+        <div id='p_ph_new_accordion' class='w3-hide'>
+          <div class='w3-section'>
+            <label>phone number</label>
+            <input id='p_ph_new_phone' class='w3-input' maxlength='16' autocomplete='false' type='text'
+                placeholder='phone number'/>
+          </div>
+          <div class='w3-section'>
+            <label>type</label>
+            <select id='p_ph_new_type' class='w3-select'>
+              <option value='primary'>primary</option>
+              <option value='secondary'>secondary</option>
+            </select>
+          </div>
+          <div class='w3-section'>
+            <button id='p_ph_new_cancel' class='w3-theme-d3 w3-card w3-button'>cancel</button>
+            <button id='p_ph_new_confirm' class='w3-theme-d3 w3-card w3-button'> confirm</button>
+          </div>
+        </div>
+      </div>
+
+      <div id='p_em' class='w3-card w3-panel'>
+        <h3>emails</h3>
+        <div id='p_em_switchable' class='w3-section' style='overflow:auto'></div>
+        <div class='w3-section'>
+          <button id='p_em_remove_button' class='w3-theme-d3 w3-card w3-button'>remove</button>
+          <button id='p_em_new_button' class='w3-theme-d3 w3-card w3-button'>new</button>
+        </div>
+        <div id='p_em_remove_accordion' class='w3-hide'>
+          <div class='w3-section'>
+            <label>email id:</label>
+            <input id='p_em_remove_input' class='w3-input' maxlength='11' autocomplete='false' type='text'
+                placeholder='email id'/>
+          </div>
+          <div class='w3-section'>
+            <button id='p_em_remove_cancel' class='w3-theme-d3 w3-card w3-button'> cancel</button>
+            <button id='p_em_remove_confirm' class='w3-theme-d3 w3-card w3-button'> confirm</button>
+          </div>
+        </div>
+        <div id='p_em_new_accordion' class='w3-hide'>
+          <div class='w3-section'>
+            <label>email address:</label>
+            <input id='p_em_new_email' class='w3-input ' maxlength='128' autocomplete='false' type='text'
+                placeholder='email address'/>
+          </div>
+          <div class='w3-section'>
+            <label>type:</label>
+            <select id='p_em_new_type' class='w3-select'>
+              <option value='primary'>primary</option>
+              <option value='secondary'>secondary</option>
+            </select>
+          </div>
+          <div class='w3-section'>
+            <button id='p_em_new_cancel' class='w3-theme-d3 w3-card w3-button'>cancel</button>
+            <button id='p_em_new_confirm' class='w3-theme-d3 w3-card w3-button'> confirm</button>
+          </div>
+        </div>
+      </div>
+
+      <div id='p_we' class='w3-card w3-panel'>
+        <h3>websites</h3>
+        <div id='p_we_switchable' class='w3-section' style='overflow:auto'></div>
+        <div class='w3-section'>
+          <button id='p_we_remove_button' class='w3-theme-d3 w3-card w3-button'>remove</button>
+          <button id='p_we_new_button' class='w3-theme-d3 w3-card w3-button'>new</button>
+        </div>
+        <div id='p_we_remove_accordion' class='w3-hide'>
+          <div class='w3-section'>
+            <label>website id:</label>
+            <input id='p_we_remove_input' class='w3-input' maxlength='11' autocomplete='false' type='text'
+                placeholder='website id'/>
+          </div>
+          <div class='w3-section'>
+            <button id='p_we_remove_cancel' class='w3-theme-d3 w3-card w3-button'>cancel</button>
+            <button id='p_we_remove_confirm' class='w3-theme-d3 w3-card w3-button'>confirm</button>
+          </div>
+        </div>
+        <div id='p_we_new_accordion' class='w3-hide'>
+          <div class='w3-section'>
+            <label>url:</label>
+            <input id='p_we_new_url' class='w3-input' maxlength='256' autocomplete='false' type='text'
+                placeholder='url'/>
+          </div>
+          <div class='w3-section'>
+            <label>type:</label>
+            <select id='p_we_new_type' class='w3-select'>
+              <option value='primary'>primary</option>
+              <option value='secondary'>secondary</option>
+            </select>
+          </div>
+          <div class='w3-section'>
+            <button id='p_we_new_cancel' class='w3-theme-d3 w3-card w3-button'>cancel</button>
+            <button id='p_we_new_confirm' class='w3-theme-d3 w3-card w3-button'> confirm</button>
+          </div>
+        </div>
+      </div>
+
+      <div id='p_ad' class='w3-card w3-panel'>
+        <h3>addresses</h3>
+        <div id='p_ad_switchable' class='w3-section' style='overflow:auto'></div>
+        <div class='w3-section'>
+          <div class='w3-section'>
+            <button id='p_ad_remove_button' class='w3-theme-d3 w3-card w3-button'> remove</button>
+            <button id='p_ad_new_button' class='w3-theme-d3 w3-card w3-button'>new</button>
+          </div>
+          <div id='p_ad_remove_accordion' class='w3-hide'>
+            <div class='w3-section'>
+              <label>address id:</label>
+              <input id='p_ad_remove_input' class='w3-input' maxlength='11' autocomplete='false' type='text'
+                  placeholder='address id'/>
+            </div>
+            <div class='w3-section'>
+              <button id='p_ad_remove_cancel' class='w3-theme-d3 w3-card w3-button'> cancel</button>
+              <button id='p_ad_remove_confirm' class='w3-theme-d3 w3-card w3-button'> confirm</button>
+            </div>
+          </div>
+          <div id='p_ad_new_accordion' class='w3-hide'>
+            <div class='w3-section'>
+              <label>line 1:</label>
+              <input id='p_ad_new_line_1' class='w3-input' maxlength='64' autocomplete='false' type='text'
+                  placeholder='line 1'/>
+            </div>
+            <div class='w3-section'>
+              <label>line 2:</label>
+              <input id='p_ad_new_line_2' class='w3-input' maxlength='64' autocomplete='false' type='text'
+                  placeholder='line 2'/>
+            </div>
+            <div class='w3-section'>
+              <label>suburb:</label>
+              <input id='p_ad_new_suburb' class='w3-input' maxlength='64' autocomplete='false' type='text'
+                  placeholder='suburb'/>
+            </div>
+            <div class='w3-section'>
+              <label>state:</label>
+              <input id='p_ad_new_state' class='w3-input' maxlength='32' autocomplete='false' type='text'
+                  placeholder='state'/>
+            </div>
+            <div class='w3-section'>
+              <label>post code:</label>
+              <input id='p_ad_new_post_code' class='w3-input' maxlength='8' autocomplete='false' type='text'
+                  placeholder='post code'/>
+            </div>
+            <div class='w3-section'>
+              <label>type:</label>
+              <select id='p_ad_new_type' class='w3-select'>
+                <option value='primary'>primary</option>
+                <option value='secondary'>secondary</option>
+              </select>
+            </div>
+            <div class='w3-section'>
+              <button id='p_ad_new_cancel' class='w3-theme-d3 w3-card w3-button'>cancel</button>
+              <button id='p_ad_new_confirm' class='w3-theme-d3 w3-card w3-button'> confirm</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id='pt_div' class='w3-theme w3-card w3-panel'>
+    <h2>Person Table</h2>
+    <div id='pt_switchable' class='w3-white w3-card w3-responsive' style='max-height:500px'></div>
+    <div class='w3-row'>
+      <div class='w3-quarter w3-margin-right'>
+        <label>sort column:</label>
+        <select id='pt_select_column' class='w3-select'>
+          <option value='__pk_id'>id</option>
+          <option value='first_name'>first name</option>
+          <option value='last_name'>last name</option>
+        </select>
+      </div>
+      <div class='w3-quarter'>
+        <label>sort direction:</label>
+        <select id='pt_select_direction' class='w3-select'>
+          <option value='ASC'>Ascending</option>
+          <option value='DESC'>Descending</option>
+        </select>
+      </div>
+    </div>
+    <div class='w3-section'>
+      <button id='pt_button' class='w3-theme-d3 w3-card w3-button'>Fetch Table</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

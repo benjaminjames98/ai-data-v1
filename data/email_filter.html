@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<head>
+  <title>Email Filter</title>
+  <script src='email_filter.js'></script>
+  <link rel='stylesheet' href='w3.css'>
+  <link rel='stylesheet' href='w3-theme-deep-orange.css'>
+</head>
+<body>
+
+<div id='sec_div' class='w3-theme w3-card w3-container w3-hide w3-show'>
+  <h2 class='w3-margin-bottom'>Private Access</h2>
+  <input id='sec_input' class='w3-card w3-input w3-margin-bottom' autocomplete='false' type='password'
+      placeholder='pass-code' autofocus/>
+  <button id='sec_button' class='w3-theme-d3 w3-card w3-button w3-margin-bottom'>Submit</button>
+</div>
+
+<div id='initially_hidden' class='w3-hide'>
+
+  <header class='w3-container w3-theme'>
+    <h1>Email Filter</h1>
+  </header>
+  <section class='w3-card-4 w3-container'>
+    <div style='float: left' class='w3-card w3-panel w3-margin'>
+      <div class='w3-section'>
+        <label>post code filter (leave blank for all):</label>
+        <input id='input_postcode' class='w3-input' placeholder='7000,7307,7310'/>
+      </div>
+      <div class='w3-section'>
+        <label>visibility:</label>
+        <select id='select_visibility' class='w3-select'>
+          <option value='any'>any</option>
+          <option value='public'>public</option>
+          <option value='private'>private</option>
+        </select>
+      </div>
+      <div class='w3-section'>
+        <label>participating (breaking bread):</label>
+        <select id='select_participating' class='w3-select'>
+          <option value='any'>any</option>
+          <option value='yes'>yes</option>
+          <option value='no'>no</option>
+          <option value='undecided'>undecided</option>
+          <option value='not_yet_contacted'>not yet contacted</option>
+        </select>
+      </div>
+      <div class='w3-section'>
+        <label>scope:</label>
+        <select id='select_scope' class='w3-select'>
+          <option value='churches'>churches</option>
+          <option value='everyone'>everyone</option>
+        </select>
+      </div>
+      <div class='w3-section'>
+        <button class='w3-theme-d3 w3-card w3-button' id='confirm'>confirm</button>
+      </div>
+    </div>
+    <div style='float: left;' class='w3-card w3-margin'>
+      <header class='w3-container w3-theme'>
+        <label>denominations:</label>
+      </header>
+      <select id='select_denomination' class='w3-select'>
+        <option value='any'>any</option>
+        <option value='choose'>choose</option>
+      </select>
+      <div id='switchable_den'></div>
+    </div>
+  </section>
+
+
+  <div class='w3-margin-top w3-card-4' style='height: 200px; overflow-y: scroll'>
+    <header class='w3-container w3-margin-bottom w3-theme'>
+      <h3>Results</h3>
+    </header>
+    <p id='emails'></p>
+  </div>
+
+
+</div>
+
+</body></html>

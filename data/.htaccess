@@ -1,0 +1,8 @@
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^data\.ai\.org\.au$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.data\.ai\.org\.au$
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+RewriteRule ^/?$ "http\:\/\/ai\.org\.au\/data" [R=301,L]
+

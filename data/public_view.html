@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Public View</title>
+  <script src='public_view.js'></script>
+  <link rel='stylesheet' href='w3.css'>
+  <link rel='stylesheet' href='w3-theme-grey.css'>
+</head>
+<body class='w3-container'>
+
+<div id='ct_div' class='w3-theme w3-card w3-panel'>
+  <h2>Public Access</h2>
+  <div id='ct_switchable' class='w3-white w3-card w3-responsive' style='max-height: 500px'></div>
+  <div class='w3-row'>
+    <div class='w3-quarter w3-margin-right'>
+      <label>sort column:</label>
+      <select id='ct_select_column' class='w3-select'>
+        <option value='__pk_id'>id</option>
+        <option value='name'>name</option>
+        <option value='denomination'>denomination</option>
+      </select>
+    </div>
+    <div class='w3-quarter'>
+      <label>sort direction:</label>
+      <select id='ct_select_direction' class='w3-select'>
+        <option value='ASC'>Ascending</option>
+        <option value='DESC'>Descending</option>
+      </select>
+    </div>
+  </div>
+  <div class='w3-section'>
+    <button id='ct_button' class='w3-theme-d3 w3-card w3-button'>Fetch Table
+    </button>
+  </div>
+</div>
+</body>
+</html>
